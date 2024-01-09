@@ -33,7 +33,7 @@
 		                    <div class="dropdown-menu" style="">
 		                      <a class="dropdown-item view_evaluator" href="javascript:void(0)" data-id="<?php echo $row['id'] ?>">View</a>
 		                      <div class="dropdown-divider"></div>
-		                      <a class="dropdown-item" href="./index.php?page=edit_evaluator&id=<?php echo $row['id'] ?>">Edit</a>
+		                      <a class="dropdown-item" href="index.php?page=edit_evaluator&id=<?php echo $row['id'] ?>">Edit</a>
 		                      <div class="dropdown-divider"></div>
 		                      <a class="dropdown-item delete_evaluator" href="javascript:void(0)" data-id="<?php echo $row['id'] ?>">Delete</a>
 		                    </div>

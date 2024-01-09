@@ -24,7 +24,7 @@ $id = $_GET['id'];
 				  </div>
 				</span>
 				<?php endif; ?>
-                <img class="img-circle img-bordered-sm" src="assets/uploads/<?php echo $row['avatar'] ?>" alt="user image">
+                <img class="img-circle img-bordered-sm" src="../assets/uploads/<?php echo $row['avatar'] ?>" alt="user image">
                 <span class="username">
                   <a href="#"><?php echo ucwords($row['uname']) ?></a>
                 </span>
@@ -73,10 +73,11 @@ $id = $_GET['id'];
 	$('.delete_progress').click(function(){
 	_conf("Are you sure to delete this progress?","delete_progress",[$(this).attr('data-id')])
 	})
+	
 	function delete_progress($id){
 		start_load()
 		$.ajax({
-			url:'ajax.php?action=delete_progress',
+			url:'../api/ajax.php?action=delete_progress',
 			method:'POST',
 			data:{id:$id},
 			success:function(resp){
