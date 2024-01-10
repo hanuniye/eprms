@@ -23,7 +23,7 @@
 		                    </div>
 						</div>
 						<div class="form-group d-flex justify-content-center align-items-center">
-							<img src="<?php echo isset($avatar) ? 'assets/uploads/'.$avatar :'' ?>" alt="Avatar" id="cimg" class="img-fluid img-thumbnail ">
+							<img src="<?php echo isset($avatar) ? '../assets/uploads/'.$avatar :'' ?>" alt="Avatar" id="cimg" class="img-fluid img-thumbnail ">
 						</div>
 					</div>
 					<div class="col-md-6">
