@@ -42,6 +42,34 @@ class Action
 		}
 		header("location:../view/login.php");
 	}
+
+	function get_emp_tasks2()
+	{
+		extract($_POST);
+		$qry = "select * from task_list where employee_id = $employee_id";
+		$res = $this->db->query($qry);
+		$tasks = [];
+		$massege = [];
+
+		if ($res) {
+			while ($row = $res->fetch_assoc()) {
+				$tasks[] = $row;
+			}
+
+			$massege = [
+				"status" => true,
+				"data" => $tasks
+			];
+		} else {
+			$massege = [
+				"status" => false,
+				"data" => $this->db->error
+			];
+		}
+
+		echo json_encode($massege);
+
+	}
 	function login2()
 	{
 		extract($_POST);
@@ -55,6 +83,52 @@ class Action
 		} else {
 			return 3;
 		}
+	}
+
+	function addAward()
+	{
+		extract($_POST);
+
+		$query = "insert into award(employee_id,task_id,award) values($employee_id,$task_id,'$award')";
+		$exec = $this->db->query($query);
+		$massege = [];
+
+		if ($exec) {
+			$massege = [
+				"status" => true,
+				"data" => "seccessfuly added"
+			];
+			
+		} else {
+			$massege = [
+				"status" => false,
+				"data" => $this->db->error
+			];
+		}
+
+		echo json_encode($massege);
+	}
+
+	function delete_award(){
+		extract($_POST);
+
+        $query = "delete from award where id=$id";
+        $exec = $this->db->query($query);
+        $massege = [];
+
+        if($exec){
+            $massege = [
+                "status" => true,
+                "data" => "seccessfully deleted"
+            ];
+        }
+        else{
+            $massege = [
+                "status" => true,
+                "data" => $conn->error
+            ];
+        }
+        echo json_encode($massege);
 	}
 	function save_user()
 	{
@@ -271,6 +345,7 @@ class Action
 				}
 			}
 		}
+
 		$chk = $this->db->query("SELECT * FROM department_list where department = '$department' and id != '{$id}' ")->num_rows;
 		if ($chk > 0) {
 			return 2;

@@ -11,10 +11,26 @@ if($action == 'login'){
 	if($login)
 		echo $login;
 }
+
+if($action == 'get_emp_tasks2'){
+	$get_emp_tasks2 = $crud->get_emp_tasks2();
+	if($get_emp_tasks2)
+		echo $get_emp_tasks2;
+}
 if($action == 'login2'){
 	$login = $crud->login2();
 	if($login)
 		echo $login;
+}
+if($action == 'addAward'){
+	$addAward = $crud->addAward();
+	if($addAward)
+		echo $addAward;
+}
+if($action == 'delete_award'){
+	$delete_award = $crud->delete_award();
+	if($delete_award)
+		echo $delete_award;
 }
 if($action == 'logout'){
 	$logout = $crud->logout();
