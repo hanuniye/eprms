@@ -27,6 +27,11 @@ if($action == 'addAward'){
 	if($addAward)
 		echo $addAward;
 }
+if($action == 'updateAward'){
+	$updateAward = $crud->updateAward();
+    if($updateAward)
+        echo $updateAward;
+}
 if($action == 'delete_award'){
 	$delete_award = $crud->delete_award();
 	if($delete_award)

@@ -109,6 +109,28 @@ class Action
 		echo json_encode($massege);
 	}
 
+	function updateAward(){
+		extract($_POST);
+		$query = "update award set employee_id=$employee_id,task_id=$task_id,award='$award' where id=$id";
+		$exec = $this->db->query($query);
+
+		$massege = [];
+
+		if ($exec) {
+            $massege = [
+                "status" => true,
+                "data" => "seccessfuly updated"
+            ];
+            
+        } else {
+            $massege = [
+                "status" => false,
+                "data" => $this->db->error
+            ];
+        }
+		echo json_encode($massege);
+	}
+
 	function delete_award(){
 		extract($_POST);
 
