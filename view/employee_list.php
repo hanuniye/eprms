@@ -13,25 +13,26 @@
 						<th class="text-center">#</th>
 						<th>Name</th>
 						<th>Email</th>
+						<th>Evaluator</th>
 						<th>Department</th>
-						<th>Designation</th>
+						<th>Jobs</th>
 						<th>Action</th>
 					</tr>
 				</thead>
 				<tbody>
 					<?php
 					$i = 1;
-					$designations = $conn->query("SELECT * FROM designation_list ");
+					$designations = $conn->query("SELECT * FROM jobs ");
 					$design_arr[0]= "Unset";
 					while($row=$designations->fetch_assoc()){
-						$design_arr[$row['id']] =$row['designation'];
+						$design_arr[$row['id']] =$row['job'];
 					}
 					$departments = $conn->query("SELECT * FROM department_list ");
 					$dept_arr[0]= "Unset";
 					while($row=$departments->fetch_assoc()){
 						$dept_arr[$row['id']] =$row['department'];
 					}
-					$qry = $conn->query("SELECT *,concat(lastname,', ',firstname,' ',middlename) as name FROM employee_list order by concat(lastname,', ',firstname,' ',middlename) asc");
+					$qry = $conn->query("SELECT *,concat(firstname,', ',middlename,' ',lastname) as name FROM employee_list order by concat(firstname,', ',middlename,' ',lastname) asc");
 					while($row= $qry->fetch_assoc()):
 					?>
 					<tr>

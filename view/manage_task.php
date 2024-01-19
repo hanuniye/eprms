@@ -22,7 +22,7 @@ if(isset($_GET['id'])){
 						<select name="employee_id" id="employee_id" class="form-control form-control-sm" required="">
 							<option value=""></option>
 							<?php 
-							$employees = $conn->query("SELECT *,concat(lastname,', ',firstname,' ',middlename) as name FROM employee_list order by concat(lastname,', ',firstname,' ',middlename) asc");
+							$employees = $conn->query("SELECT *,concat(firstname,', ',middlename,' ',lastname) as name FROM employee_list order by concat(firstname,', ',middlename,' ',lastname) asc");
 							while($row=$employees->fetch_assoc()):
 							?>
 							<option value="<?php echo $row['id'] ?>" <?php echo isset($employee_id) && $employee_id == $row['id'] ? 'selected' : '' ?>><?php echo $row['name'] ?></option>

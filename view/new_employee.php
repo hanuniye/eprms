@@ -43,11 +43,11 @@
 								class="form-control form-control-sm select2">
 								<option value=""></option>
 								<?php
-								$designations = $conn->query("SELECT * FROM designation_list order by designation asc");
+								$designations = $conn->query("SELECT * FROM jobs order by job asc");
 								while ($row = $designations->fetch_assoc()):
 									?>
 									<option value="<?php echo $row['id'] ?>" <?php echo isset($designation_id) && $designation_id == $row['id'] ? 'selected' : '' ?>>
-										<?php echo $row['designation'] ?>
+										<?php echo $row['job'] ?>
 									</option>
 								<?php endwhile; ?>
 							</select>
@@ -57,7 +57,7 @@
 							<select name="evaluator_id" id="evaluator_id" class="form-control form-control-sm select2">
 								<option value=""></option>
 								<?php
-								$evaluators = $conn->query("SELECT *,concat(lastname,', ',firstname,' ',middlename) as name FROM evaluator_list order by concat(lastname,', ',firstname,' ',middlename) asc");
+								$evaluators = $conn->query("SELECT *,concat(firstname,', ',middlename,' ',lastname) as name FROM evaluator_list order by concat(firstname,', ',middlename,' ',lastname) asc");
 								while ($row = $evaluators->fetch_assoc()):
 									?>
 									<option value="<?php echo $row['id'] ?>" <?php echo isset($evaluator_id) && $evaluator_id == $row['id'] ? 'selected' : '' ?>>

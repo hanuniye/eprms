@@ -98,7 +98,7 @@ class Action
 				"status" => true,
 				"data" => "seccessfuly added"
 			];
-			
+
 		} else {
 			$massege = [
 				"status" => false,
@@ -109,7 +109,8 @@ class Action
 		echo json_encode($massege);
 	}
 
-	function updateAward(){
+	function updateAward()
+	{
 		extract($_POST);
 		$query = "update award set employee_id=$employee_id,task_id=$task_id,award='$award' where id=$id";
 		$exec = $this->db->query($query);
@@ -117,40 +118,40 @@ class Action
 		$massege = [];
 
 		if ($exec) {
-            $massege = [
-                "status" => true,
-                "data" => "seccessfuly updated"
-            ];
-            
-        } else {
-            $massege = [
-                "status" => false,
-                "data" => $this->db->error
-            ];
-        }
+			$massege = [
+				"status" => true,
+				"data" => "seccessfuly updated"
+			];
+
+		} else {
+			$massege = [
+				"status" => false,
+				"data" => $this->db->error
+			];
+		}
 		echo json_encode($massege);
 	}
 
-	function delete_award(){
+	function delete_award()
+	{
 		extract($_POST);
 
-        $query = "delete from award where id=$id";
-        $exec = $this->db->query($query);
-        $massege = [];
+		$query = "delete from award where id=$id";
+		$exec = $this->db->query($query);
+		$massege = [];
 
-        if($exec){
-            $massege = [
-                "status" => true,
-                "data" => "seccessfully deleted"
-            ];
-        }
-        else{
-            $massege = [
-                "status" => true,
-                "data" => $conn->error
-            ];
-        }
-        echo json_encode($massege);
+		if ($exec) {
+			$massege = [
+				"status" => true,
+				"data" => "seccessfully deleted"
+			];
+		} else {
+			$massege = [
+				"status" => true,
+				"data" => $conn->error
+			];
+		}
+		echo json_encode($massege);
 	}
 	function save_user()
 	{
@@ -405,7 +406,7 @@ class Action
 				}
 			}
 		}
-		$chk = $this->db->query("SELECT * FROM designation_list where designation = '$designation' and id != '{$id}' ")->num_rows;
+		$chk = $this->db->query("SELECT * FROM jobs where job = '$designation' and id != '{$id}' ")->num_rows;
 		if ($chk > 0) {
 			return 2;
 		}
@@ -413,18 +414,63 @@ class Action
 			$data .= ", user_ids='" . implode(',', $user_ids) . "' ";
 		}
 		if (empty($id)) {
-			$save = $this->db->query("INSERT INTO designation_list set $data");
+			$save = $this->db->query("insert into jobs(job,description) values('$designation','$description')");
 		} else {
-			$save = $this->db->query("UPDATE designation_list set $data where id = $id");
+			$save = $this->db->query("update jobs set job='$designation',description='$description' where id=$id");
 		}
 		if ($save) {
 			return 1;
 		}
 	}
+	function addJob()
+	{
+		extract($_POST);
+
+		$query = "insert into jobs(job,description) values('$job','$description')";
+		$exec = $this->db->query($query);
+		$massege = [];
+
+		if ($exec) {
+			$massege = [
+				"status" => true,
+				"data" => "seccessfuly added"
+			];
+
+		} else {
+			$massege = [
+				"status" => false,
+				"data" => $this->db->error
+			];
+		}
+
+		echo json_encode($massege);
+	}
+
+	function updateJob(){
+		extract($_POST);
+		$query = "update jobs set job='$job',description='$description' where id=$id";
+		$exec = $this->db->query($query);
+
+		$massege = [];
+
+		if ($exec) {
+            $massege = [
+                "status" => true,
+                "data" => "seccessfuly updated"
+            ];
+            
+        } else {
+            $massege = [
+                "status" => false,
+                "data" => $this->db->error
+            ];
+        }
+		echo json_encode($massege);
+	}
 	function delete_designation()
 	{
 		extract($_POST);
-		$delete = $this->db->query("DELETE FROM designation_list where id = $id");
+		$delete = $this->db->query("DELETE FROM jobs where id = $id");
 		if ($delete) {
 			return 1;
 		}
@@ -643,7 +689,7 @@ class Action
 	function get_progress()
 	{
 		extract($_POST);
-		$get = $this->db->query("SELECT p.*,concat(u.firstname,' ',u.lastname) as uname,u.avatar FROM task_progress p inner join task_list t on t.id = p.task_id inner join employee_list u on u.id = t.employee_id where p.task_id = $task_id order by unix_timestamp(p.date_created) desc ");
+		$get = $this->db->query("SELECT p.*,concat(u.firstname,' ',u.middlename) as uname,u.avatar FROM task_progress p inner join task_list t on t.id = p.task_id inner join employee_list u on u.id = t.employee_id where p.task_id = $task_id order by unix_timestamp(p.date_created) desc ");
 		$data = array();
 		while ($row = $get->fetch_assoc()) {
 			$row['uname'] = ucwords($row['uname']);

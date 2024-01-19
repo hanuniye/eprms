@@ -19,7 +19,7 @@
 				<tbody>
 					<?php
 					$i = 1;
-					$qry = $conn->query("SELECT *,concat(lastname,', ',firstname,' ',middlename) as name FROM evaluator_list order by concat(lastname,', ',firstname,' ',middlename) asc");
+					$qry = $conn->query("SELECT *,concat(firstname,', ',middlename,' ',lastname) as name FROM evaluator_list order by concat(lastname,', ',firstname,' ',middlename) asc");
 					while($row= $qry->fetch_assoc()):
 					?>
 					<tr>

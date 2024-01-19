@@ -78,10 +78,15 @@ if($action == 'delete_department'){
 	if($save)
 		echo $save;
 }
-if($action == 'save_designation'){
-	$save = $crud->save_designation();
-	if($save)
-		echo $save;
+if($action == 'addJob'){
+	$addJob = $crud->addJob();
+	if($addJob)
+		echo $addJob;
+}
+if($action == 'updateJob'){
+	$updateJob = $crud->updateJob();
+	if($updateJob)
+		echo $updateJob;
 }
 if($action == 'delete_designation'){
 	$save = $crud->delete_designation();

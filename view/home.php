@@ -25,10 +25,10 @@ if ($_SESSION['login_type'] != 1)
       <div class="small-box bg-light shadow-sm border">
         <div class="inner">
           <h3>
-            <?php echo $conn->query("SELECT * FROM designation_list")->num_rows; ?>
+            <?php echo $conn->query("SELECT * FROM jobs")->num_rows; ?>
           </h3>
 
-          <p>Total Designations</p>
+          <p>Total Jobs</p>
         </div>
         <div class="icon">
           <i class="fa fa-list-alt"></i>

@@ -62,10 +62,10 @@
             </a>
           </li>
           <li class="nav-item dropdown">
-            <a href="./index.php?page=designation" class="nav-link nav-designation">
+            <a href="./index.php?page=job" class="nav-link nav-designation">
               <i class="nav-icon fas fa-list-alt"></i>
               <p>
-                Designations
+                Jobs
               </p>
             </a>
           </li>

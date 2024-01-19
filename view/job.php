@@ -17,7 +17,7 @@
 				<thead>
 					<tr>
 						<th class="text-center">#</th>
-						<th>Designation</th>
+						<th>Job</th>
 						<th>Description</th>
 						<th>Action</th>
 					</tr>
@@ -25,12 +25,12 @@
 				<tbody>
 					<?php
 					$i = 1;
-					$qry = $conn->query("SELECT * FROM designation_list order by designation asc ");
+					$qry = $conn->query("SELECT * FROM jobs order by job asc ");
 					while($row= $qry->fetch_assoc()):
 					?>
 					<tr>
 						<th class="text-center"><?php echo $i++ ?></th>
-						<td><b><?php echo $row['designation'] ?></b></td>
+						<td><b><?php echo $row['job'] ?></b></td>
 						<td><b><?php echo $row['description'] ?></b></td>
 						<td class="text-center">
 		                    <div class="btn-group">

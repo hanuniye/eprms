@@ -34,7 +34,7 @@
 						$where = " where e.evaluator_id = {$_SESSION['login_id']} ";
 
 
-					$qry = $conn->query("SELECT t.*,concat(e.lastname,', ',e.firstname,' ',e.middlename) as name FROM task_list t inner join employee_list e on e.id = t.employee_id $where order by unix_timestamp(t.date_created) asc");
+					$qry = $conn->query("SELECT t.*,concat(e.firstname,', ',e.middlename,' ',e.lastname) as name FROM task_list t inner join employee_list e on e.id = t.employee_id $where order by unix_timestamp(t.date_created) asc");
 					while ($row = $qry->fetch_assoc()):
 						$trans = get_html_translation_table(HTML_ENTITIES, ENT_QUOTES);
 						unset($trans["\""], $trans["<"], $trans[">"], $trans["<h2"]);
