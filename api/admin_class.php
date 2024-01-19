@@ -446,7 +446,8 @@ class Action
 		echo json_encode($massege);
 	}
 
-	function updateJob(){
+	function updateJob()
+	{
 		extract($_POST);
 		$query = "update jobs set job='$job',description='$description' where id=$id";
 		$exec = $this->db->query($query);
@@ -454,17 +455,17 @@ class Action
 		$massege = [];
 
 		if ($exec) {
-            $massege = [
-                "status" => true,
-                "data" => "seccessfuly updated"
-            ];
-            
-        } else {
-            $massege = [
-                "status" => false,
-                "data" => $this->db->error
-            ];
-        }
+			$massege = [
+				"status" => true,
+				"data" => "seccessfuly updated"
+			];
+
+		} else {
+			$massege = [
+				"status" => false,
+				"data" => $this->db->error
+			];
+		}
 		echo json_encode($massege);
 	}
 	function delete_designation()
@@ -676,15 +677,24 @@ class Action
 	function get_emp_tasks()
 	{
 		extract($_POST);
+
 		if (!isset($task_id))
 			$get = $this->db->query("SELECT * FROM task_list where employee_id = $employee_id and status = 2 and id not in (SELECT task_id FROM ratings) ");
 		else
 			$get = $this->db->query("SELECT * FROM task_list where employee_id = $employee_id and status = 2 and id not in (SELECT task_id FROM ratings where task_id !='$task_id') ");
-		$data = array();
+		$data = [];
+		$message = [];
+
 		while ($row = $get->fetch_assoc()) {
-			$data[] = $row;
+			$data []= $row;
 		}
-		return json_encode($data);
+
+		$message = [
+			'status' => true,
+            'data' => $data
+		];
+
+		echo json_encode($message);
 	}
 	function get_progress()
 	{

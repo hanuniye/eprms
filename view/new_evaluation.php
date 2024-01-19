@@ -12,7 +12,7 @@
 							<select name="employee_id" id="employee_id" class="form-control form-control-sm select2">
 								<option value=""></option>
 								<?php
-								$employees = $conn->query("SELECT *,concat(lastname,', ',firstname,' ',middlename) as name FROM employee_list where evaluator_id = {$_SESSION['login_id']} order by concat(lastname,', ',firstname,' ',middlename) asc");
+								$employees = $conn->query("SELECT *,concat(firstname,', ',middlename,' ',lastname) as name FROM employee_list where evaluator_id = {$_SESSION['login_id']} order by concat(firstname,', ',middlename,' ',lastname) asc");
 								while ($row = $employees->fetch_assoc()):
 									?>
 									<option value="<?php echo $row['id'] ?>" <?php
@@ -167,7 +167,7 @@
 		}
 
 	})
-	
+
 	function displayImg(input, _this) {
 		if (input.files && input.files[0]) {
 			var reader = new FileReader();
@@ -181,49 +181,40 @@
 	$('#employee_id').change(function () {
 		update_emp()
 	})
+
 	function update_emp() {
 		start_load();
+		const task = '<?php echo isset($task_id) ? $task_id : ''; ?>' ;
 		$('#task_id').html('')
 		$.ajax({
 			url: '../api/ajax.php?action=get_emp_tasks',
 			method: 'POST',
-			data: { employee_id: $('#employee_id').val(), task_id: '<?php echo isset($task_id) ? $task_id : ''; ?>' },
+			dataType: 'json',
+			data: { employee_id: $('#employee_id').val(), task_id: task },
+			success: function (resp) {
+				console.log(resp)
+				let task_id = $('#task_id');
+                let option = `<option value='${resp.data[0].id}'>${resp.data[0].task}</option>`;
+
+                task_id.html(option);
+                $("#task_id").val(resp.data[0].id);
+
+				task_update()
+				end_load();
+				if ('<?php echo isset($id) ?>' == 1)
+					$('#task_id').trigger('change')
+			},
 			error: (err) => {
 				alert_toast("An error occured", 'error')
 				console.log(err)
 				end_load()
-			},
-			success: function (resp) {
-				if (resp && typeof JSON.parse(resp) === 'object') {
-					resp = JSON.parse(resp)
-					var opt = $('<option value=""></option>')
-					if (Object.keys(resp).length > 0) {
-						var oc = opt.clone()
-						$('#task_id').append(oc)
-						Object.keys(resp).map(k => {
-							var oc = opt.clone()
-							oc.text(resp[k].task)
-							oc.attr('value', resp[k].id)
-							var task_id = '<?php echo isset($task_id) ? $task_id : ''; ?>';
-							if (task_id == resp[k].id)
-								oc.attr('selected', true)
-							$('#task_id').append(oc)
-						})
-					} else {
-						$('#task_id').html('')
-						var oc = opt.clone()
-						oc.text("Employee is not assign to any task yet.")
-						oc.attr({ 'disabled': 'disabled', 'selected': 'selected' })
-						$('#task_id').append(oc)
-					}
-				}
 			},
 			complete: function () {
 				$('#task_id').select2({
 					placeholder: 'Please select task here',
 					width: '100%'
 				})
-				task_update()
+				// task_update()
 				end_load();
 				if ('<?php echo isset($id) ?>' == 1)
 					$('#task_id').trigger('change')
