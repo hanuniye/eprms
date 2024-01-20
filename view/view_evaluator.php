@@ -1,7 +1,7 @@
 <?php include '../config/db_connect.php' ?>
 <?php
 if(isset($_GET['id'])){
-	$qry = $conn->query("SELECT *,concat(lastname,', ',firstname,' ',middlename) as name FROM evaluator_list where id = ".$_GET['id'])->fetch_array();
+	$qry = $conn->query("SELECT *,concat(firstname,', ',middlename,' ',lastname) as name FROM evaluator_list where id = ".$_GET['id'])->fetch_array();
 foreach($qry as $k => $v){
 	$$k = $v;
 }

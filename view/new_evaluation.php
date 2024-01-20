@@ -184,37 +184,47 @@
 
 	function update_emp() {
 		start_load();
-		const task = '<?php echo isset($task_id) ? $task_id : ''; ?>' ;
 		$('#task_id').html('')
 		$.ajax({
 			url: '../api/ajax.php?action=get_emp_tasks',
 			method: 'POST',
-			dataType: 'json',
-			data: { employee_id: $('#employee_id').val(), task_id: task },
-			success: function (resp) {
-				console.log(resp)
-				let task_id = $('#task_id');
-                let option = `<option value='${resp.data[0].id}'>${resp.data[0].task}</option>`;
-
-                task_id.html(option);
-                $("#task_id").val(resp.data[0].id);
-
-				task_update()
-				end_load();
-				if ('<?php echo isset($id) ?>' == 1)
-					$('#task_id').trigger('change')
-			},
+			data: { employee_id: $('#employee_id').val(), task_id: '<?php echo isset($task_id) ? $task_id : ''; ?>' },
 			error: (err) => {
 				alert_toast("An error occured", 'error')
 				console.log(err)
 				end_load()
+			},
+			success: function (resp) {
+				if (resp && typeof JSON.parse(resp) === 'object') {
+					resp = JSON.parse(resp)
+					var opt = $('<option value=""></option>')
+					if (Object.keys(resp).length > 0) {
+						var oc = opt.clone()
+						$('#task_id').append(oc)
+						Object.keys(resp).map(k => {
+							var oc = opt.clone()
+							oc.text(resp[k].task)
+							oc.attr('value', resp[k].id)
+							var task_id = '<?php echo isset($task_id) ? $task_id : ''; ?>';
+							if (task_id == resp[k].id)
+								oc.attr('selected', true)
+							$('#task_id').append(oc)
+						})
+					} else {
+						$('#task_id').html('')
+						var oc = opt.clone()
+						oc.text("Employee is not assign to any task yet.")
+						oc.attr({ 'disabled': 'disabled', 'selected': 'selected' })
+						$('#task_id').append(oc)
+					}
+				}
 			},
 			complete: function () {
 				$('#task_id').select2({
 					placeholder: 'Please select task here',
 					width: '100%'
 				})
-				// task_update()
+				task_update()
 				end_load();
 				if ('<?php echo isset($id) ?>' == 1)
 					$('#task_id').trigger('change')
@@ -222,6 +232,7 @@
 		})
 	}
 
+	
 	function task_update() {
 		$('#task_id').change(function () {
 			start_load()

@@ -683,18 +683,13 @@ class Action
 		else
 			$get = $this->db->query("SELECT * FROM task_list where employee_id = $employee_id and status = 2 and id not in (SELECT task_id FROM ratings where task_id !='$task_id') ");
 		$data = [];
-		$message = [];
 
 		while ($row = $get->fetch_assoc()) {
-			$data []= $row;
+			$data[] = $row;
 		}
 
-		$message = [
-			'status' => true,
-            'data' => $data
-		];
 
-		echo json_encode($message);
+		return json_encode($data);
 	}
 	function get_progress()
 	{

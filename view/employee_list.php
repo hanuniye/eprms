@@ -13,7 +13,6 @@
 						<th class="text-center">#</th>
 						<th>Name</th>
 						<th>Email</th>
-						<th>Evaluator</th>
 						<th>Department</th>
 						<th>Jobs</th>
 						<th>Action</th>

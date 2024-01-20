@@ -1,7 +1,7 @@
 <?php 
 include '../config/db_connect.php';
 if(isset($_GET['id'])){
-	$qry = $conn->query("SELECT t.*,concat(e.lastname,', ',e.firstname,' ',e.middlename) as name FROM task_list t inner join employee_list e on e.id = t.employee_id  where t.id = ".$_GET['id'])->fetch_array();
+	$qry = $conn->query("SELECT t.*,concat(e.firstname,', ',e.middlename,' ',e.lastname) as name FROM task_list t inner join employee_list e on e.id = t.employee_id  where t.id = ".$_GET['id'])->fetch_array();
 	foreach($qry as $k => $v){
 		$$k = $v;
 	}

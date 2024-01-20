@@ -6,7 +6,7 @@ $id = $_GET['id'];
 <div class="container-fluid">
 	<div id="post-field">
 		<?php
-		$progress = $conn->query("SELECT p.*,concat(u.firstname,' ',u.lastname) as uname,u.avatar FROM task_progress p inner join task_list t on t.id = p.task_id inner join employee_list u on u.id = t.employee_id where p.task_id = $id order by unix_timestamp(p.date_created) desc ");
+		$progress = $conn->query("SELECT p.*,concat(u.firstname,' ',u.middlename) as uname,u.avatar FROM task_progress p inner join task_list t on t.id = p.task_id inner join employee_list u on u.id = t.employee_id where p.task_id = $id order by unix_timestamp(p.date_created) desc ");
 		if ($progress->num_rows > 0):
 			while ($row = $progress->fetch_assoc()):
 				?>

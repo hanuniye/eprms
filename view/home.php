@@ -42,7 +42,7 @@ if ($_SESSION['login_type'] != 1)
             <?php echo $conn->query("SELECT * FROM users")->num_rows; ?>
           </h3>
 
-          <p>Total Users</p>
+          <p>Total Admins</p>
         </div>
         <div class="icon">
           <i class="fa fa-users"></i>

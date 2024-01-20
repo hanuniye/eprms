@@ -1,12 +1,12 @@
 <?php include '../config/db_connect.php' ?>
 <?php
 if(isset($_GET['id'])){
-	$qry = $conn->query("SELECT *,concat(lastname,', ',firstname,' ',middlename) as name FROM employee_list where id = ".$_GET['id'])->fetch_array();
+	$qry = $conn->query("SELECT *,concat(firstname,', ',middlename,' ',lastname) as name FROM employee_list where id = ".$_GET['id'])->fetch_array();
 foreach($qry as $k => $v){
 	$$k = $v;
 }
-$designation= $conn->query("SELECT * FROM designation_list where id = $designation_id ");
-$designation = $designation->num_rows > 0 ? $designation->fetch_array()['designation'] : 'Unknown Designation';
+$designation= $conn->query("SELECT * FROM jobs where id = $designation_id ");
+$designation = $designation->num_rows > 0 ? $designation->fetch_array()['job'] : 'Unknown Designation';
 $department= $conn->query("SELECT * FROM department_list where id = $department_id ");
 $department = $department->num_rows > 0 ? $department->fetch_array()['department'] : 'Unknown Department';
 $evaluator= $conn->query("SELECT *,concat(lastname,', ',firstname,' ',middlename) as name FROM evaluator_list where id = $evaluator_id ");
