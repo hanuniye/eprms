@@ -38,7 +38,7 @@
 							</select>
 						</div>
 						<div class="form-group">
-							<label for="" class="control-label">Designation</label>
+							<label for="" class="control-label">Job</label>
 							<select name="designation_id" id="designation_id"
 								class="form-control form-control-sm select2">
 								<option value=""></option>
