@@ -48,7 +48,7 @@
 									</select>
 								</div>
 								<div class="form-group">
-									<label for="" class="control-label">Timeliness</label>
+									<label for="" class="control-label">Deadline</label>
 									<select name="timeliness" id="timeliness" class="form-control form-control-sm"
 										required>
 										<?php
@@ -63,7 +63,7 @@
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="" class="control-label">Quality</label>
+									<label for="" class="control-label">TaskDiscipline</label>
 									<select name="quality" id="quality" class="form-control form-control-sm" required>
 										<?php
 										for ($i = 5; $i >= 0; $i--):
@@ -75,7 +75,7 @@
 									</select>
 								</div>
 								<div class="form-group">
-									<label for="" class="control-label">Accuracy</label>
+									<label for="" class="control-label">TeamWork</label>
 									<select name="accuracy" id="accuracy" class="form-control form-control-sm" required>
 										<?php
 										for ($i = 5; $i >= 0; $i--):
