@@ -39,15 +39,15 @@ if(isset($_GET['id'])){
 					<dd><?php echo $efficiency ?></dd>
 				</dl>
 				<dl>
-					<dt><b class="border-bottom border-primary">Timeliness</b></dt>
+					<dt><b class="border-bottom border-primary">Deadline</b></dt>
 					<dd><?php echo $timeliness ?></dd>
 				</dl>
 				<dl>
-					<dt><b class="border-bottom border-primary">Quality</b></dt>
+					<dt><b class="border-bottom border-primary">TaskDiscipline</b></dt>
 					<dd><?php echo $quality ?></dd>
 				</dl>
 				<dl>
-					<dt><b class="border-bottom border-primary">Accuracy</b></dt>
+					<dt><b class="border-bottom border-primary">Teamwork</b></dt>
 					<dd><?php echo $accuracy ?></dd>
 				</dl>
 				<dl>
